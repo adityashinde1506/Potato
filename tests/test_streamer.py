@@ -16,6 +16,8 @@ class TestStreamer(unittest.TestCase):
         
     def test_single_line_getter(self):
         streamer=Streamer(self.files)
+        lines=[]
         for i in range(5):
-            print(streamer.get_single_line())
+            lines.append(streamer.get_single_line())
+        self.assertEqual(len(lines),5)
 
