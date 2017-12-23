@@ -70,3 +70,15 @@ class Streamer:
             chunk.append(line)
 
         return chunk
+
+    def get_generator(self):
+        self.__init_filename_iterator()
+
+        def _generator():
+            while 1:
+                line=self.get_single_line()
+                if line==None:
+                    break
+                yield line
+
+        return _generator()

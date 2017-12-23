@@ -45,3 +45,10 @@ class TestStreamer(unittest.TestCase):
         streamer=Streamer(self.files)
         chunk=streamer.get_chunk(1000000000)
         self.assertNotEqual(len(chunk),1000000000)
+
+    def test_generator_run(self):
+        streamer=Streamer(self.files)
+        generator=streamer.get_generator()
+        i=0
+        for line in generator:
+            pass
