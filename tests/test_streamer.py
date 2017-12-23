@@ -35,3 +35,13 @@ class TestStreamer(unittest.TestCase):
         for i in range(1000000):
             line=streamer.get_single_line()
         self.assertIsNone(line)
+
+    def test_chunk_getter(self):
+        streamer=Streamer(self.files)
+        chunk=streamer.get_chunk(1000)
+        self.assertEqual(len(chunk),1000)
+
+    def test_insane_chunk_getter(self):
+        streamer=Streamer(self.files)
+        chunk=streamer.get_chunk(1000000000)
+        self.assertNotEqual(len(chunk),1000000000)

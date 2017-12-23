@@ -61,4 +61,12 @@ class Streamer:
         '''
             Get chunk_size lines from files.
         '''
-        pass
+        chunk=[]
+
+        while len(chunk)!=chunk_size:
+            line=self.get_single_line()
+            if not line:
+                break
+            chunk.append(line)
+
+        return chunk
