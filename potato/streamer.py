@@ -13,6 +13,10 @@ class Streamer:
         self.curr_file=None
         self.__step_filename()
 
+    def __del__(self):
+        if self.curr_file:
+            self.curr_file.close()
+
     def __init_filename_iterator(self):
         '''
             Sets filename iterator to the first of the files passed during
