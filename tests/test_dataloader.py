@@ -15,6 +15,3 @@ class TestDirLoader(unittest.TestCase):
     def test_file_getter(self):
         files=get_data_files(self.path,["ztomatrix.txt"])
         self.assertIsNotNone(files)
-        print(files)
-        
-
