@@ -20,6 +20,7 @@ class Context:
 
         self.files=get_data_files(directory,files)
         self.streamer=Streamer(self.files)
+        self.frame=Frame(self.streamer)
         logger.info(f"Potato context set at directory {directory} for files {files}")
 
     def get_streamer(self):
@@ -28,3 +29,6 @@ class Context:
         '''
 
         return self.streamer
+
+    def get_frame(self):
+        return self.frame
