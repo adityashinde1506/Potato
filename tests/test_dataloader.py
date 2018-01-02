@@ -5,7 +5,7 @@ import logging
 #logging.basicConfig(level=logging.DEBUG)
 sys.path.append("/home/adityas/Projects/Potato")
 
-from potato.search_utils import *
+from potato.backend import *
 
 class TestDirLoader(unittest.TestCase):
 
