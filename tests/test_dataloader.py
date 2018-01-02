@@ -15,3 +15,8 @@ class TestDirLoader(unittest.TestCase):
     def test_file_getter(self):
         files=get_data_files(self.path,["ztomatrix.txt"])
         self.assertIsNotNone(files)
+
+    def test_regex(self):
+        files=get_data_files(self.path,["ztomatrix.txt"])
+        rfiles=get_data_files(self.path,[r"\S*\.txt"])
+        self.assertTrue(len(rfiles)>len(files))
