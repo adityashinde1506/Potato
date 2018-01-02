@@ -4,13 +4,14 @@ logger=logging.getLogger(__name__)
 
 from pathlib import Path
 from itertools import cycle
+import re
 
 def path_visitor(path,names,found):
     '''
         Recursively traverses directory and looks for given files.
     '''
     for name in names:
-        if name==path.parts[-1]:
+        if re.match(name,path.parts[-1]):
             logger.debug(f"Found file {str(path)}")
             found.append(str(path))
     if not path.is_dir():
