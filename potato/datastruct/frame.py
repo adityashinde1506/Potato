@@ -2,7 +2,7 @@ import logging
 
 logger=logging.getLogger(__name__)
 
-from itertools import islice
+from itertools import islice,tee
 
 class Frame:
 
@@ -26,7 +26,9 @@ class Frame:
         '''
             Return a list of num_samples from the stream.
         '''
-        heads=islice(self.generator,num_samples)
+        generator,self.generator=tee(self.generator,2)
+        heads=islice(generator,num_samples)
+        del generator
         return list(heads)
 
     def collect(self):
