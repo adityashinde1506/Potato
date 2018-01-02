@@ -21,3 +21,6 @@ class TestFrame(unittest.TestCase):
 
     def test_frame_head(self):
         self.assertEqual(len(self.frame.head(5)),5)
+
+    def test_file_num_info(self):
+        print(self.frame.get_num_files())

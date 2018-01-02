@@ -6,7 +6,7 @@ import logging
 sys.path.append("/home/adityas/Projects/Potato")
 
 from potato.backend import *
-from potato.context import *
+from potato import Context
 
 class TestContext(unittest.TestCase):
 

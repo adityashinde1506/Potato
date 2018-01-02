@@ -11,6 +11,9 @@ class Frame:
         self.generator=self.streamer.get_generator()
         logger.info(f"Frame {self} initialised with streamer {streamer}.")
 
+    def get_num_files(self):
+        return len(self.streamer.files)
+
     def apply_map(self,map_func):
         self.generator=map(map_func,self.generator)
         logger.debug(f"Applied {map_func} to frame.")
