@@ -5,8 +5,7 @@ import logging
 #logging.basicConfig(level=logging.DEBUG)
 sys.path.append("/home/adityas/Projects/Potato")
 
-from potato.streamer import Streamer
-from potato.search_utils import get_data_files
+from potato.backend import *
 
 class TestStreamer(unittest.TestCase):
 

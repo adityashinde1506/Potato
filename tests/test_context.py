@@ -6,12 +6,13 @@ import logging
 sys.path.append("/home/adityas/Projects/Potato")
 
 from potato.backend import *
+from potato.context import *
 
-class TestDirLoader(unittest.TestCase):
+class TestContext(unittest.TestCase):
 
     def setUp(self):
         self.path="/home/adityas/Projects/Experiment_Results"
+        self.context=Context(self.path,["ztomatrix.txt"])
 
-    def test_file_getter(self):
-        files=get_data_files(self.path,["ztomatrix.txt"])
-        self.assertIsNotNone(files)
+    def test_context_creation(self):
+        self.assertIsNotNone(self.context.get_streamer())
