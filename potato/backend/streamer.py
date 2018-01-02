@@ -35,7 +35,7 @@ class Streamer:
             self.curr_file.close()
 
         try:
-            self.curr_file=open(next(self.filename_iter))
+            self.curr_file=open(next(self.filename_iter),errors='ignore')
         except:
             logger.error(f"File iterator terminated.")
             self.curr_file=None
