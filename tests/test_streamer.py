@@ -10,8 +10,8 @@ from potato.backend import *
 class TestStreamer(unittest.TestCase):
 
     def setUp(self):
-        self.path="/home/adityas/Projects/Experiment_Results"
-        self.files=get_data_files(self.path,["ztomatrix.txt"])
+        self.path="/home/adityas/Projects"
+        self.files=get_data_files(self.path,["\w+.txt"])
 
     def test_single_line_getter(self):
         streamer=Streamer(self.files)

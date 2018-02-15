@@ -5,6 +5,7 @@ logger=logging.getLogger(__name__)
 from .backend import *
 from .datastruct import *
 
+
 class Context:
     '''
         This is a context object. It creates frame and streamer objects on
@@ -33,3 +34,6 @@ class Context:
 
     def get_frame(self):
         return self.frame
+
+    def get_dframe(self, column_names, seperator=",", skip_title=True):
+        return DFrame(self.streamer, column_names=column_names, seperator=seperator, skip_title=skip_title)

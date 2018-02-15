@@ -11,8 +11,8 @@ from potato.backend import *
 class TestFrame(unittest.TestCase):
 
     def setUp(self):
-        self.path="/home/adityas/Projects/Experiment_Results"
-        self.files=get_data_files(self.path,["ztomatrix.txt"])
+        self.path="/home/adityas/Projects"
+        self.files=get_data_files(self.path,["\w+.txt"])
         self.streamer=Streamer(self.files)
         self.frame=Frame(self.streamer)
 

@@ -1,26 +1,26 @@
 import pandas
 import logging
 import numpy
+from potato.datastruct.frame import Frame
 
 logger = logging.getLogger(__name__)
 
 
-class DFrame(object):
+class DFrame(Frame):
 
     """
         Streams chunks of data from the iterator in form of a pandas dataframe.
     """
 
-    def __init__(self, frame, column_names, seperator=",", skip_title=True):
-        self.frame = frame
+    def __init__(self, streamer, column_names, seperator=",", skip_title=True):
+        Frame.__init__(self, streamer)
+        self.custom_maps = []
         self.column_names = column_names
         self.skip_title = skip_title
 
-        self.custom_maps = []
-
     def init_frame(self):
-        self.frame.apply_map(lambda x: x.strip())
-        self.frame.apply_map(lambda x: x.split(","))
+        self.apply_map(lambda x: x.strip())
+        self.apply_map(lambda x: x.split(","))
 
     def add_custom_map(self, map_func):
         self.custom_maps.append(lambda x: map_func(x))
@@ -32,18 +32,18 @@ class DFrame(object):
         """
 
         if self.skip_title:
-            _ = self.frame.take(1)
+            _ = self.take(1)
 
         self.init_frame()
 
         for _map in self.custom_maps:
-            self.frame.apply_map(_map)
+            self.apply_map(_map)
 
         def _generator():
 
             while 1:
 
-                chunk = self.frame.take(batch_size)
+                chunk = self.take(batch_size)
 
                 if len(chunk) == 0:
                     break

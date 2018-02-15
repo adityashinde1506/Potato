@@ -33,9 +33,11 @@ class Streamer:
         '''
         if self.curr_file:
             self.curr_file.close()
+            self.curr_file = None
 
         try:
-            self.curr_file=open(next(self.filename_iter),errors='ignore')
+            next_file = next(self.filename_iter)
+            self.curr_file = open(next_file, errors='ignore')
         except:
             logger.error(f"File iterator terminated.")
             self.curr_file=None
@@ -72,7 +74,7 @@ class Streamer:
         return chunk
 
     def get_generator(self):
-        self.__init_filename_iterator()
+        #self.__init_filename_iterator()
 
         def _generator():
             while 1:
