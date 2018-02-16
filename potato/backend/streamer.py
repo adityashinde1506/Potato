@@ -1,16 +1,17 @@
 import logging
 
-logger=logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
+
 
 class Streamer:
     '''
         Streams lines from given files into chunks of fixed size.
     '''
 
-    def __init__(self,files_list):
-        self.files=files_list
+    def __init__(self, files_list):
+        self.files = files_list
         self.__init_filename_iterator()
-        self.curr_file=None
+        self.curr_file = None
         self._step_filename()
 
     def __del__(self):
@@ -23,7 +24,7 @@ class Streamer:
             initialisation.
         '''
         logger.debug(f"Initialising filename iterator.")
-        self.filename_iter=iter(self.files)
+        self.filename_iter = iter(self.files)
 
     def _step_filename(self):
         '''
@@ -38,9 +39,9 @@ class Streamer:
         try:
             next_file = next(self.filename_iter)
             self.curr_file = open(next_file, errors='ignore')
-        except:
+        except Exception as e:
             logger.error(f"File iterator terminated.")
-            self.curr_file=None
+            self.curr_file = None
 
         logger.debug(f"Currently reading {self.curr_file}")
 
@@ -59,14 +60,14 @@ class Streamer:
         else:
             return None
 
-    def get_chunk(self,chunk_size=1000):
+    def get_chunk(self, chunk_size=1000):
         '''
             Get chunk_size lines from files.
         '''
-        chunk=[]
+        chunk = []
 
-        while len(chunk)!=chunk_size:
-            line=self.get_single_line()
+        while len(chunk) != chunk_size:
+            line = self.get_single_line()
             if not line:
                 break
             chunk.append(line)
@@ -74,12 +75,11 @@ class Streamer:
         return chunk
 
     def get_generator(self):
-        #self.__init_filename_iterator()
 
         def _generator():
             while 1:
-                line=self.get_single_line()
-                if line==None:
+                line = self.get_single_line()
+                if line is None:
                     break
                 yield line
 
