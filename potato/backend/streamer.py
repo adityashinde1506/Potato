@@ -11,7 +11,7 @@ class Streamer:
         self.files=files_list
         self.__init_filename_iterator()
         self.curr_file=None
-        self.__step_filename()
+        self._step_filename()
 
     def __del__(self):
         if self.curr_file:
@@ -25,7 +25,7 @@ class Streamer:
         logger.debug(f"Initialising filename iterator.")
         self.filename_iter=iter(self.files)
 
-    def __step_filename(self):
+    def _step_filename(self):
         '''
             Opens the next file in the iterator and closes the current one.
             If there are no files left, then the file pointer
@@ -50,9 +50,9 @@ class Streamer:
             the returns None.
         '''
         if self.curr_file:
-            line=self.curr_file.readline()
-            if line=='':
-                self.__step_filename()
+            line = self.curr_file.readline()
+            if line == '':
+                self._step_filename()
                 return self.get_single_line()
             else:
                 return line
